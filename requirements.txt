@@ -1,0 +1,5 @@
+chromadb
+openai
+
+langchain
+langchain_community

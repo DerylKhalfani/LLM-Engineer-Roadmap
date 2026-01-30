@@ -1,0 +1,7 @@
+.env
+CLAUDE.md
+plan.md
+/docs/fastapi
+.DS_store
+
+/venv

@@ -7,15 +7,6 @@ A structured path to becoming a job-ready AI Engineer, with a bridge to LLM rese
 
 ---
 
-## Philosophy
-
-- **One repo, many releases.** Depth beats breadth.
-- **Ship early, improve iteratively.**
-- **Teach as you go** (posts/videos).
-- **Start applying after v0.4–v0.5.**
-
----
-
 ## Flagship Project
 
 **Project:** FastAPI Docs Assistant
@@ -95,7 +86,6 @@ File 1 issue or doc improvement to FastAPI repo based on gaps discovered during 
 ### Deliverables
 
 - [ ] Repo release v0.1
-- [ ] 5-minute demo video
 - [ ] README: architecture + design choices + eval results
 - [ ] Announce v0.1 on LinkedIn/Twitter
 
@@ -184,7 +174,6 @@ First meaningful PR to lm-evaluation-harness, RAGAS, LlamaIndex, or LangGraph (b
 - [ ] Agent evaluation results (multi-hop accuracy, step efficiency)
 - [ ] Benchmark report: before vs after (latency, cost, failure rate)
 - [ ] "Production mode" config flags
-- [ ] Post or video: "Building an Agentic Docs Assistant with FastAPI"
 
 ---
 
