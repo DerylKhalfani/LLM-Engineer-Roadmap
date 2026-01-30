@@ -13,3 +13,6 @@ https://docs.langchain.com/oss/python/integrations/document_loaders/unstructured
 
 ideas from:
 https://medium.com/@iraj.hedayati/building-a-private-local-rag-chatbot-using-chroma-and-markdown-documents-147cae7f8e4a
+
+## Tips and Notes
+UnstructuredMarkdownLoader strips markdown formatting therefore it can remove context

@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # initialize vector(chroma)
-chroma_client = chromadb.Client()
+chroma_client = chromadb.PersistentClient(path = './chroma_db')
 
 model_name = 'text-embedding-3-large'
 
@@ -54,7 +54,7 @@ def list_files_os_walk(directory: str) -> List[str]:
 chunked_documents = []
 chunked_metadatas = []
 
-for markdown_path in list_files_os_walk('../docs/fastapi'):
+for markdown_path in list_files_os_walk('./docs/fastapi'):
 
     # skip non-md file
     if not markdown_path.endswith('.md'):
@@ -72,45 +72,26 @@ for markdown_path in list_files_os_walk('../docs/fastapi'):
 
         for chunk in text_splitter.split_text(header_doc.page_content):
             chunked_documents.append(chunk)
-            chunked_metadatas.append(header_doc.metadata)
+
+            if not header_doc.metadata:
+                header_doc.metadata = {'Header 1': 'None'}
+            
+            header_doc.metadata['source'] = markdown_path
+
+            chunked_metadatas.append(header_doc.metadata.copy())
 
 # list of unique ids
 uuids = [str(uuid4()) for _ in range(len(chunked_documents))]
 
-# adding documents to vector
-collection.add(ids=uuids, documents=chunked_documents, metadatas=chunked_metadatas)
+print(f'Total documents to be added: {len(chunked_documents)}')
 
-# if __name__ == "__main__":                                         
-#       # Test with single file                                        
-#       test_path = '../docs/macro1.md'                                
-                                                                     
-#       print(f"Testing with: {test_path}\n")                          
-                                                                     
-#       # Load and split    
-#       with open(test_path, 'r', encoding='utf-8') as f:
-#            raw_text = f.read()                                                                                                                           
-                                                                     
-#       # Split by headers                                             
-#       header_docs = markdown_text_splitter.split_text(raw_text)           
-#       print(f"Split into {len(header_docs)} header sections\n")      
-                                                                     
-#       # Show first header section                                    
-#       if header_docs:                                                
-#           print("First header section:")                             
-#           print(f"  Metadata: {header_docs[0].metadata}")            
-#           print(f"  Content preview: {header_docs[0].page_content[:200]}...\n")                         
-                                                                     
-#       # Now split into chunks                                        
-#       test_chunks = []                                               
-#       test_metas = []                                                
-                                                                     
-#       for header_doc in header_docs:                                 
-#           chunks = text_splitter.split_text(header_doc.page_content) 
-#           for chunk in chunks:                                       
-#               test_chunks.append(chunk)                              
-#               test_metas.append(header_doc.metadata)                 
-                                                                     
-#       print(f"Total chunks created: {len(test_chunks)}")             
-#       print(f"\nFirst chunk preview:")                               
-#       print(f"  Text: {test_chunks[0][:200]}...")                    
-#       print(f"  Metadata: {test_metas[0]}")                 
+batch_size = 100
+
+for i in range(0, len(chunked_documents), batch_size):
+    batch_docs = chunked_documents[i:i+batch_size]
+    batch_metas = chunked_metadatas[i:i+batch_size]
+    batch_ids = uuids[i:i+batch_size]
+    # adding documents to vector
+    collection.add(ids=batch_ids, documents=batch_docs, metadatas=batch_metas)
+
+print(f'Collection count: {collection.count()}')
