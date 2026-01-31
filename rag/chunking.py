@@ -33,7 +33,7 @@ headers_to_split_on = [
 markdown_text_splitter = MarkdownHeaderTextSplitter(headers_to_split_on)
 
 
-collection = chroma_client.create_collection(name = 'fastapi_docs', embedding_function = embedding_model)
+collection = chroma_client.get_or_create_collection(name = 'fastapi_docs', embedding_function = embedding_model)
 
 ### HELPER FUNCTIONS ###
 def list_files_os_walk(directory: str) -> List[str]:
@@ -91,7 +91,7 @@ for i in range(0, len(chunked_documents), batch_size):
     batch_docs = chunked_documents[i:i+batch_size]
     batch_metas = chunked_metadatas[i:i+batch_size]
     batch_ids = uuids[i:i+batch_size]
-    
+
     # adding documents to vector
     collection.add(ids=batch_ids, documents=batch_docs, metadatas=batch_metas)
 
