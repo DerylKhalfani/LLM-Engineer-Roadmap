@@ -1,4 +1,4 @@
-# Chunking
+# Chunking, Embedding, Retrieval
 
 ## Scraping source
 Look at fastapi source docs 
@@ -36,15 +36,18 @@ https://medium.com/@iraj.hedayati/building-a-private-local-rag-chatbot-using-chr
 - append the header_doc metadata to a list (chunked_metadatas)
 
 - Create unique ids for each chunk
-
 - then add it to the vector databases by batches (100)
-
-
 
 
 ### Tips and Notes during chunking
 - UnstructuredMarkdownLoader strips markdown formatting therefore it can remove context
 - Document is a class object consist of metadatas, id, embeddings
 - OpenAI has a 300,000 token limit per request therefore i add it by batches
+
+### Retrieval workflow
+- load the PersistentClient with the saem database path
+- get the collection of the vector database
+- build a function that takes a query and use .query() to get the desired documents -> result: QueryResult
+
 
 
