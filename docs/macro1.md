@@ -39,7 +39,7 @@ https://medium.com/@iraj.hedayati/building-a-private-local-rag-chatbot-using-chr
 - then add it to the vector databases by batches (100)
 
 
-### Tips and Notes during chunking
+### Notes during chunking
 - UnstructuredMarkdownLoader strips markdown formatting therefore it can remove context
 - Document is a class object consist of metadatas, id, embeddings
 - OpenAI has a 300,000 token limit per request therefore i add it by batches
@@ -48,6 +48,17 @@ https://medium.com/@iraj.hedayati/building-a-private-local-rag-chatbot-using-chr
 - load the PersistentClient with the saem database path
 - get the collection of the vector database
 - build a function that takes a query and use .query() to get the desired documents -> result: QueryResult
+
+# Generation
+
+### Reference link
+https://github.com/openai/openai-python (github)
+https://github.com/openai/openai-python/blob/main/src/openai/resources/responses/responses.py (more specific)
+https://platform.openai.com/docs/guides/text (website)
+
+### Notes during generation
+- max_completion_tokens is the total tokens
+- only gpt 5 and o series models that can reason values: Currently supported values are `none`,  `minimal`, `low`, `medium`, `high`, and `xhigh`
 
 
 
