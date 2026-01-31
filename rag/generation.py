@@ -16,5 +16,6 @@ response = client.responses.create(
 print(response.output[1].content[0].text)
 
 def llm_generation(input: str) -> str:
+    
 
 
