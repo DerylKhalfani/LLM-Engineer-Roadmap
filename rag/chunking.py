@@ -91,6 +91,7 @@ for i in range(0, len(chunked_documents), batch_size):
     batch_docs = chunked_documents[i:i+batch_size]
     batch_metas = chunked_metadatas[i:i+batch_size]
     batch_ids = uuids[i:i+batch_size]
+    
     # adding documents to vector
     collection.add(ids=batch_ids, documents=batch_docs, metadatas=batch_metas)
 
