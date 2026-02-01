@@ -13,15 +13,21 @@ def llm_generation(query: str) -> str:
     # retrieve from vector database
     result: QueryResult = retrieval_chromadb(query)
 
-    # take the content and source
-    content = result['documents']
-    source = result['metadatas'][0][0]['source']
+    # take the content and source (contains 5 source)
+    chunks_with_sources = []
+    for i, doc in enumerate(result['documents'][0]):
+        source = result['metadatas'][0][i]['source']
+        chunks_with_sources.append(f'[Source: {source}] \n Docs: \n {doc}')
+    
+    context = '\n\n ---- \n\n'.join(chunks_with_sources)
 
     response = client.responses.create(
         model= 'gpt-5-nano',
         instructions = f"""
-        Generate text, (question and answer style) based on the content: {content} \n and source: {source}.
-        Choose the content that is more similar in context with the input and include the source.
+        Generate text, (question and answer style) based on these retrieved documents:
+        
+        {context}
+        Choose the content that is more similar in context with the input and cite the source you used.
 
         CONSTRAINTS:
         - Keep it straightforward and under 200 words

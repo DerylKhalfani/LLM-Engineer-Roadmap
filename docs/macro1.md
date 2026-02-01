@@ -6,7 +6,7 @@ https://github.com/fastapi/fastapi/tree/master/docs/en/docs
 
 
 ## Vector Databases
-Use ChromaDB for its cheap use
+Use ChromaDB 
 
 ### reference link and ideas
 source code for chromaDB:
@@ -56,9 +56,17 @@ https://github.com/openai/openai-python (github)
 https://github.com/openai/openai-python/blob/main/src/openai/resources/responses/responses.py (more specific)
 https://platform.openai.com/docs/guides/text (website)
 
+openai cookbook is also great
+
 ### Notes during generation
 - max_completion_tokens is the total tokens
 - only gpt 5 and o series models that can reason values: Currently supported values are `none`,  `minimal`, `low`, `medium`, `high`, and `xhigh`
+
+# Main (FASTAPI)
+
+### reference link
+https://fastapi.tiangolo.com/tutorial/first-steps/#step-1-import-fastapi (first step)
+
 
 
 
