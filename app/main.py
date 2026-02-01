@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from rag.retrieval import retrieval_chromadb
+from rag.generation import llm_generation
 
 # initialize fastapi instance
 app = FastAPI()
@@ -11,5 +11,5 @@ async def root():
 
 @app.get('/query')
 async def generate(query: str):
-    response = retrieval_chromadb(query)
+    response = llm_generation(query)
     return response

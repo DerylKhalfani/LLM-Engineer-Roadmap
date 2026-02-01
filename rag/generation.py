@@ -1,7 +1,7 @@
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
-from retrieval import retrieval_chromadb
+from rag.retrieval import retrieval_chromadb
 
 from chromadb.api.types import QueryResult
 
@@ -27,10 +27,11 @@ def llm_generation(query: str) -> str:
         Generate text, (question and answer style) based on these retrieved documents:
         
         {context}
-        Choose the content that is more similar in context with the input and cite the source you used.
+        Choose the content that is more similar in context with the input.
 
         CONSTRAINTS:
         - Keep it straightforward and under 200 words
+        - Cite the Sources you used
         """,
         input= query,
         reasoning= {'effort': 'minimal'}

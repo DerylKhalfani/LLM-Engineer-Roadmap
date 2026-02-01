@@ -55,6 +55,7 @@ https://medium.com/@iraj.hedayati/building-a-private-local-rag-chatbot-using-chr
 https://github.com/openai/openai-python (github)
 https://github.com/openai/openai-python/blob/main/src/openai/resources/responses/responses.py (more specific)
 https://platform.openai.com/docs/guides/text (website)
+https://platform.openai.com/docs/guides/structured-outputs (structured outputs using pydantic)
 
 openai cookbook is also great
 
