@@ -62,6 +62,7 @@ openai cookbook is also great
 ### Notes during generation
 - max_completion_tokens is the total tokens
 - only gpt 5 and o series models that can reason values: Currently supported values are `none`,  `minimal`, `low`, `medium`, `high`, and `xhigh`
+- using .parse() allowing for structured outputs and used .parsed (pydantic model) not .text (string representation)
 
 # Main (FASTAPI)
 
