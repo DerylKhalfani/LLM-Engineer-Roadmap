@@ -89,6 +89,9 @@ https://platform.openai.com/docs/guides/function-calling#defining-functions
 ### Reference
 https://developers.openai.com/cookbook/examples/how_to_use_guardrails/
 
+### Notes on guardrails
+- using async since it enables asynchronous programming (running multiple tasks concurrently without blocking)
+
 
 
 

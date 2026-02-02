@@ -149,19 +149,27 @@ async def llm_response(query: str) -> str:
 
 # USING GUARDRAIL
 async def llm_response_with_guardrail(query):
+    
+    # running two tasks in parallerl
     topical_guardrail_task = asyncio.create_task(topical_guardrail(query))
     llm_response_task = asyncio.create_task(llm_response(query))
 
     while True:
+        # waiting for whichever finishes first
+        # await asyncio.wait() pausing and wait
+        # return_when=asyncio.FIRST_COMPLETED resume when atleast one task finishes
+        # done set of tasks finished, _ -> running
         done, _ = await asyncio.wait(
               [topical_guardrail_task, llm_response_task], return_when=asyncio.FIRST_COMPLETED
         )
 
+
         if topical_guardrail_task in done:
+            # getting GuardrailResponse object
             guardrail_response = topical_guardrail_task.result()
 
             if not guardrail_response.allowed:
-                llm_response_task.cancel()
+                llm_response_task.cancel() # cancel the llm task
                 print('Topical guardrail triggered')
 
                 return """I'm a FastAPI assistant and can only help with FastAPI-related questions. Please ask me something about FastAPI!"""
