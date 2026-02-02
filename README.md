@@ -51,7 +51,7 @@ docs/         # writeups, diagrams, research notes
 ### Build
 
 - **RAG baseline:** chunking + embeddings + retrieval over FastAPI docs
-- **Citations:** every answer links to exact doc sections (page + heading or chunk id)
+- **Citations:** every answer links to exact docs
 - **Tool calling** (2–3 tools max):
   - `search_docs(query)`
   - `open_source(doc_id)` — returns the cited text

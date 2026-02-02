@@ -1,7 +1,10 @@
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
-from rag.retrieval import retrieval_chromadb
+import json
+
+from tools.retrieve import tools, retrieve_content
+
 
 from pydantic import BaseModel
 from typing import List
@@ -11,52 +14,84 @@ load_dotenv()
 
 client = OpenAI()
 
-class ContentSource(BaseModel):
-    answer: str
-    source: str
-
 def llm_generation(query: str) -> str:
-    # retrieve from vector database
-    result: QueryResult = retrieval_chromadb(query)
 
-    # take the content and source (contains 5 source)
-    chunks_with_sources = []
-    for i, doc in enumerate(result['documents'][0]):
-        source = result['metadatas'][0][i]['source']
-        chunks_with_sources.append(f'Docs: \n {doc} \n [Source: {source}]')
-    
-    context = '\n\n ---- \n\n'.join(chunks_with_sources)
-
+    input_list = [
+        {'role':'user', 'content': f'{query}'}
+    ]
     response = client.responses.parse(
         model= 'gpt-5-nano',
         instructions = f"""
-        Generate text, (question and answer style) based on these retrieved documents:
-        
-        {context}
+        You are a FastAPI assistant.                                   
+                                                                 
+        CRITICAL: You MUST use the retrieve_content tool for ALL FastAPI questions.                                             
+        Never answer from memory - always search the documentation first..
         Choose the content that is more similar in context with the input.
 
         CONSTRAINTS:
         - Keep it straightforward and under 200 words
-        - Cite the Sources you used
+        - IMPORTANT to Cite the Sources (.md file) IF you used the tool.
         """,
-        input= query,
+        input= input_list,
         reasoning= {'effort': 'minimal'},
-        text_format=ContentSource
+        tools=tools
     )
 
-    print(response)
+    input_list += response.output
 
-    response = response.output[1].content[0].parsed
+    # looping response.output and check if there is function_call
+    function_calls = [item for item in response.output if item.type == 'function_call']
 
-    print(type(response))
+    # this is used to avoid calling the model twice if its a non-tool query
+    if function_calls:
+        for item in function_calls:
+            if item.name == 'retrieve_content':
+                    # Executing function logic
+                    args = json.loads(item.arguments)
+                    context = retrieve_content(args['query']) # extracting query
 
-    print(response)
+                    # provide function call results tpo the model
+                    input_list.append({
+                        'type': 'function_call_output',
+                        'call_id': item.call_id,
+                        'output': json.dumps({
+                            'output': context
+                        })
+                        
+                    })
 
-    answer = response.answer
-    source = response.source
+        # print('fInal input: ')
+        # print(input_list)
 
-    return answer, source
+        response = client.responses.parse(
+        model= 'gpt-5-nano',
+        instructions = f"""
+        You are a FastAPI assistant. that can engage in a conversational manner.                                  
+                                                                 
+        CRITICAL: 
+        Use the retrieve_content tool ONLY for FastAPI-related questions.                   
+        For general conversation, respond normally without tools.
 
+        CONSTRAINTS:
+        - Keep it straightforward and under 200 words
+        - IMPORTANT to Cite the Sources (.md file) IF you used the tool.
+        """,
+        input= input_list,
+        reasoning= {'effort': 'minimal'},
+        tools=tools
+        )
+
+        # print('final response')
+        # print(response)
+        return response.output[1].content[0].text
+
+    # no tool call
+    else:
+         # print('final response')
+        # print(response)
+         
+         return response.output[1].content[0].text
+    
 # query = 'How do i connect backend to frontend in fastapi?'
 # response = llm_generation(query= query)
 

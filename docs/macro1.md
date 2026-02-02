@@ -57,17 +57,28 @@ https://github.com/openai/openai-python/blob/main/src/openai/resources/responses
 https://platform.openai.com/docs/guides/text (website)
 https://platform.openai.com/docs/guides/structured-outputs (structured outputs using pydantic)
 
+https://platform.openai.com/docs/guides/function-calling#defining-functions
+
 openai cookbook is also great
 
 ### Notes during generation
 - max_completion_tokens is the total tokens
 - only gpt 5 and o series models that can reason values: Currently supported values are `none`,  `minimal`, `low`, `medium`, `high`, and `xhigh`
-- using .parse() allowing for structured outputs and used .parsed (pydantic model) not .text (string representation)
+- using .parse() allowing for structured outputs and use .parsed (pydantic model) not .text (string representation) otherwise use .text
 
 # Main (FASTAPI)
 
 ### reference link
 https://fastapi.tiangolo.com/tutorial/first-steps/#step-1-import-fastapi (first step)
+
+# Tools
+
+### Reference
+https://platform.openai.com/docs/guides/function-calling#defining-functions
+
+### Notes during tools
+- define tools with JSON schema
+- to use tools with model, (Call model with tools -> tools output, append tools output to input_list, Call model again with tools output included)
 
 
 
