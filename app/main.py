@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from rag.generation import llm_generation
+from rag.generation import llm_response_with_guardrail
 
 # initialize fastapi instance
 app = FastAPI()
@@ -11,5 +11,5 @@ async def root():
 
 @app.get('/query')
 async def generate(query: str):
-    response = llm_generation(query)
+    response = await llm_response_with_guardrail(query)
     return response

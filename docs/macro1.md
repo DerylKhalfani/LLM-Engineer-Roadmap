@@ -80,6 +80,15 @@ https://platform.openai.com/docs/guides/function-calling#defining-functions
 - define tools with JSON schema
 - to use tools with model, (Call model with tools -> tools output, append tools output to input_list, Call model again with tools output included)
 
+# Guardrails
+
+## Approach
+
+- Using another model to act as guardrails, checking input if its off topic
+
+### Reference
+https://developers.openai.com/cookbook/examples/how_to_use_guardrails/
+
 
 
 

@@ -2,6 +2,7 @@ from openai import OpenAI
 import os
 from dotenv import load_dotenv
 import json
+import asyncio
 
 from tools.retrieve import tools, retrieve_content
 
@@ -14,7 +15,61 @@ load_dotenv()
 
 client = OpenAI()
 
-def llm_generation(query: str) -> str:
+class GuardRailResponse(BaseModel):
+     allowed: bool
+     reason: str
+
+async def topical_guardrail(query):
+    print('Checking topical guardrail')
+
+    input_list = [
+        {'role': 'system',
+        'content': """
+        You are assessing queries for a FastAPI          
+        documentation assistant.                         
+                                                   
+        CONTEXT: Users are interacting with a FastAPI    
+        assistant, so web development questions          
+        should be interpreted as FastAPI-related unless  
+        clearly about other frameworks.                  
+                                                        
+        ALLOWED:                                         
+        - FastAPI questions and documentation            
+        - General web development questions (assumed     
+        FastAPI context)                                 
+        - Normal conversation and greetings              
+                                                        
+        NOT ALLOWED:                                     
+        - Questions explicitly about other frameworks    
+        (Django, Flask, Express, etc.)                   
+        - Questions completely unrelated to programming  
+        - Spam or harmful content                        
+                                                        
+        Examples of ALLOWED queries:                     
+        - "how to connect frontend and backend" (FastAPI 
+        context)                                         
+        - "what is CORS?"                                
+        - "how do I handle file uploads?"                
+                                                        
+        Examples of NOT ALLOWED queries:                 
+        - "how do I deploy a Django app?"                
+        - "what's the weather today?"
+         
+         """
+        },
+        {'role': 'user', 'content': query}
+    ]
+
+    response = client.responses.parse(
+         model='gpt-5-mini',
+         input= input_list,
+         text_format= GuardRailResponse
+    )
+
+    return response.output[1].content[0].parsed
+
+async def llm_response(query: str) -> str:
+    print('Getting LLM response')
 
     input_list = [
         {'role':'user', 'content': f'{query}'}
@@ -91,6 +146,31 @@ def llm_generation(query: str) -> str:
         # print(response)
          
          return response.output[1].content[0].text
+
+# USING GUARDRAIL
+async def llm_response_with_guardrail(query):
+    topical_guardrail_task = asyncio.create_task(topical_guardrail(query))
+    llm_response_task = asyncio.create_task(llm_response(query))
+
+    while True:
+        done, _ = await asyncio.wait(
+              [topical_guardrail_task, llm_response_task], return_when=asyncio.FIRST_COMPLETED
+        )
+
+        if topical_guardrail_task in done:
+            guardrail_response = topical_guardrail_task.result()
+
+            if not guardrail_response.allowed:
+                llm_response_task.cancel()
+                print('Topical guardrail triggered')
+
+                return """I'm a FastAPI assistant and can only help with FastAPI-related questions. Please ask me something about FastAPI!"""
+            
+            elif llm_response_task in done:
+                 response = llm_response_task.result()
+                 return response
+        else:
+             await asyncio.sleep(0.1) # sleep before checking tasks again
     
 # query = 'How do i connect backend to frontend in fastapi?'
 # response = llm_generation(query= query)
