@@ -49,14 +49,19 @@ with open('eval/gold_set.json') as f:
 
         if source:
             source_counter += 1
+        else:
+            print(f"Source not hit: {data['relevant_sources']}. Source from document retrieved: {[m['source'] for m in response['metadatas'][0]]}")
         
         if keywords:
             keywords_counter += 1
+        else:
+            print(f"Keywords not hit: {data['expected_keywords']}")
+
         
         if source and keywords:
             joint_counter += 1
     
-    # ---------- Metrics ----------
+    #
     source_recall_at_5 = source_counter / len_data
     keyword_hit_rate = keywords_counter / len_data
     joint_success_rate = joint_counter / len_data

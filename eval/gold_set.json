@@ -1,7 +1,107 @@
 [
-{
-    "question": "How do I enable CORS?",                     
-    "expected_keywords": ["CORSMiddleware", "allow_origins", "app.add_middleware"],                                     
-    "relevant_sources": "./docs/fastapi/tutorial/cors.md"
-}
+    {
+        "question": "How do I enable CORS?",
+        "expected_keywords": ["CORSMiddleware", "allow_origins", "app.add_middleware"],
+        "relevant_sources": "./docs/fastapi/tutorial/cors.md"
+    },
+    {
+        "question": "How do I define path parameters in FastAPI?",
+        "expected_keywords": ["path", "parameters", "def", "app.get"],
+        "relevant_sources": "./docs/fastapi/tutorial/path-params.md"
+    },
+    {
+        "question": "How do I use query parameters in FastAPI?",
+        "expected_keywords": ["query", "parameters", "Optional", "app.get"],
+        "relevant_sources": "./docs/fastapi/tutorial/query-params.md"
+    },
+    {
+        "question": "How do I receive a request body in FastAPI?",
+        "expected_keywords": ["BaseModel", "body", "POST", "app.post"],
+        "relevant_sources": "./docs/fastapi/tutorial/body.md"
+    },
+    {
+        "question": "How do I define a response model in FastAPI?",
+        "expected_keywords": ["response_model", "BaseModel", "return"],
+        "relevant_sources": "./docs/fastapi/tutorial/response-model.md"
+    },
+    {
+        "question": "How do I run background tasks in FastAPI?",
+        "expected_keywords": ["BackgroundTasks", "background", "add_task"],
+        "relevant_sources": "./docs/fastapi/tutorial/background-tasks.md"
+    },
+    {
+        "question": "How do I add middleware in FastAPI?",
+        "expected_keywords": ["middleware", "app.add_middleware", "request", "response"],
+        "relevant_sources": "./docs/fastapi/tutorial/middleware.md"
+    },
+    {
+        "question": "How do I use dependencies in FastAPI?",
+        "expected_keywords": ["Depends", "dependency", "injection"],
+        "relevant_sources": "./docs/fastapi/tutorial/dependencies/index.md"
+    },
+    {
+        "question": "How do I implement OAuth2 security in FastAPI?",
+        "expected_keywords": ["OAuth2", "token", "security", "password"],
+        "relevant_sources": "./docs/fastapi/tutorial/security/first-steps.md"
+    },
+    {
+        "question": "How do I handle file uploads in FastAPI?",
+        "expected_keywords": ["UploadFile", "File", "upload", "bytes"],
+        "relevant_sources": "./docs/fastapi/tutorial/request-files.md"
+    },
+    {
+        "question": "How do I receive form data in FastAPI?",
+        "expected_keywords": ["Form", "form", "data", "app.post"],
+        "relevant_sources": "./docs/fastapi/tutorial/request-forms.md"
+    },
+    {
+        "question": "How do I handle errors in FastAPI?",
+        "expected_keywords": ["HTTPException", "exception", "handler", "status_code"],
+        "relevant_sources": "./docs/fastapi/tutorial/handling-errors.md"
+    },
+    {
+        "question": "How do I use WebSockets in FastAPI?",
+        "expected_keywords": ["WebSocket", "websocket", "connect", "receive_text"],
+        "relevant_sources": "./docs/fastapi/advanced/websockets.md"
+    },
+    {
+        "question": "How do I mount sub-applications in FastAPI?",
+        "expected_keywords": ["mount", "sub", "application", "FastAPI"],
+        "relevant_sources": "./docs/fastapi/advanced/sub-applications.md"
+    },
+    {
+        "question": "How do I write tests for a FastAPI app?",
+        "expected_keywords": ["TestClient", "test", "assert", "requests"],
+        "relevant_sources": "./docs/fastapi/tutorial/testing.md"
+    },
+    {
+        "question": "How do I deploy a FastAPI app with Docker?",
+        "expected_keywords": ["Docker", "Dockerfile", "image", "uvicorn"],
+        "relevant_sources": "./docs/fastapi/deployment/docker.md"
+    },
+    {
+        "question": "How do I read cookie parameters in FastAPI?",
+        "expected_keywords": ["Cookie", "cookie", "parameter", "app.get"],
+        "relevant_sources": "./docs/fastapi/tutorial/cookie-params.md"
+    },
+    {
+        "question": "How do I read header parameters in FastAPI?",
+        "expected_keywords": ["Header", "header", "parameter", "app.get"],
+        "relevant_sources": "./docs/fastapi/tutorial/header-params.md"
+    },
+    {
+        "question": "How do I create my first FastAPI application?",
+        "expected_keywords": ["FastAPI", "app", "uvicorn", "app.get"],
+        "relevant_sources": "./docs/fastapi/tutorial/first-steps.md"
+    },
+    {
+        "question": "How do I use classes as dependencies in FastAPI?",
+        "expected_keywords": ["Depends", "class", "dependencies", "__init__"],
+        "relevant_sources": "./docs/fastapi/tutorial/dependencies/classes-as-dependencies.md"
+    },
+    {
+        "question": "How do I serve static files in FastAPI?",
+        "expected_keywords": ["StaticFiles", "mount", "static", "directory"],
+        "relevant_sources": "./docs/fastapi/tutorial/static-files.md"
+    }
 ]

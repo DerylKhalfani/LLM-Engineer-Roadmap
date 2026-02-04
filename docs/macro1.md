@@ -100,7 +100,7 @@ https://developers.openai.com/cookbook/examples/how_to_use_guardrails/
 ## Approach
 Use basic metrics: accuracy
 
-Might Use RAGAS framework
+RAGAS framework is a choice 
 
 ### References
 - https://arxiv.org/abs/2405.07437 Evaluation of Retrieval-Augmented Generation: A Survey
