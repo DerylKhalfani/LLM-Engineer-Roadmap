@@ -1,0 +1,7 @@
+[
+{
+    "question": "How do I enable CORS?",                     
+    "expected_keywords": ["CORSMiddleware", "allow_origins", "app.add_middleware"],                                     
+    "relevant_sources": "./docs/fastapi/tutorial/cors.md"
+}
+]

@@ -1,5 +1,8 @@
 # Chunking, Embedding, Retrieval
 
+## Notes on running from terminal
+- running python -m file1.file.py, -m adds current working directory to sys.path It looks for file1 from project root
+
 ## Scraping source
 Look at fastapi source docs 
 https://github.com/fastapi/fastapi/tree/master/docs/en/docs
@@ -91,6 +94,19 @@ https://developers.openai.com/cookbook/examples/how_to_use_guardrails/
 
 ### Notes on guardrails
 - using async since it enables asynchronous programming (running multiple tasks concurrently without blocking)
+
+# Evaluation
+
+## Approach
+Use basic metrics: accuracy
+
+Might Use RAGAS framework
+
+### References
+- https://arxiv.org/abs/2405.07437 Evaluation of Retrieval-Augmented Generation: A Survey
+
+### Notes on evaluation
+- dont forget to normalize the word
 
 
 

@@ -11,10 +11,10 @@ collection = client.get_collection(name='fastapi_docs')
 
 # Query Result includes ids, embeddings, documents, metadatas
 
-def retrieval_chromadb(texts: str) -> QueryResult:
+def retrieval_chromadb(texts: str, n_results: int = 5) -> QueryResult:
     results: QueryResult = collection.query(
         query_texts=[f'{texts}'],
-        n_results = 5
+        n_results = n_results
     )
 
     return results

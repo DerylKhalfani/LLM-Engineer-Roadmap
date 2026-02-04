@@ -6,3 +6,5 @@ langchain_community
 pydantic
 
 fastapi
+
+ragas
