@@ -102,6 +102,9 @@ Use basic metrics: accuracy
 
 RAGAS framework is a choice 
 
+MRR (Mean Reciprocal Rank) is the  average of the reciprocal ranks of the first correct answer for a set of queries -> higher is better values
+
+
 ### References
 - https://arxiv.org/abs/2405.07437 Evaluation of Retrieval-Augmented Generation: A Survey
 
