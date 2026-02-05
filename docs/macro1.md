@@ -76,6 +76,9 @@ https://fastapi.tiangolo.com/tutorial/first-steps/#step-1-import-fastapi (first 
 
 # Tools
 
+- ## Running main.py
+uvicorn app.main:app --reload --port 8080
+
 ### Reference
 https://platform.openai.com/docs/guides/function-calling#defining-functions
 
@@ -110,6 +113,24 @@ MRR (Mean Reciprocal Rank) is the  average of the reciprocal ranks of the first 
 
 ### Notes on evaluation
 - dont forget to normalize the word
+
+# Docker
+
+## Build Image
+
+## Stop docker
+docker stop <container-id>
+
+## Start docker with .env values
+docker run -d --env-file .env -p 8080:8080 llm-engineer 
+
+## Sharing Docker
+- login
+- docker tag getting-started YOUR-USER-NAME/getting-started
+- docker push YOUR-USER-NAME/getting-started
+
+### References
+https://docs.docker.com/get-started/workshop/04_sharing_app/
 
 
 

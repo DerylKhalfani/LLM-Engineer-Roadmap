@@ -4,5 +4,6 @@ plan.md
 /docs/fastapi
 .DS_store
 chroma_db
+.vscode
 
 /venv

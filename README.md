@@ -63,7 +63,7 @@ docs/         # writeups, diagrams, research notes
 
 ### Evaluation (minimum)
 
-- Gold set: 60–120 Q/A prompts (FastAPI focused)
+- Gold set: 20–60 Q/A prompts (FastAPI focused)
 - Retrieval: Recall@k, MRR
 - Answer quality: rubric + LLM-as-judge + 20–30 human spot checks
 - Citation correctness: "does it cite relevant docs section?"

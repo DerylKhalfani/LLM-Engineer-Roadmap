@@ -1,10 +1,9 @@
-chromadb
-openai
+chromadb == 1.4.1
+openai == 2.15.0
 
-langchain
-langchain_community
-pydantic
+langchain == 0.3.27
+langchain_community == 0.3.31
+pydantic == 2.12.5
 
-fastapi
-
-ragas
+fastapi == 0.128.0
+uvicorn == 0.34.0
