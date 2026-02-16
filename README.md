@@ -64,8 +64,7 @@ docs/         # writeups, diagrams, research notes
 ### Evaluation (minimum)
 
 - Gold set: 20–60 Q/A prompts (FastAPI focused)
-- Retrieval: Recall@k, MRR
-- Answer quality: rubric + LLM-as-judge + 20–30 human spot checks
+- Retrieval: Recall@k MRR
 - Citation correctness: "does it cite relevant docs section?"
 
 ### Gold Set Starters
@@ -86,40 +85,10 @@ File 1 issue or doc improvement to FastAPI repo based on gaps discovered during 
 ### Deliverables
 
 - [ ] Repo release v0.1
-- [ ] README: architecture + design choices + eval results
-- [ ] Announce v0.1 on LinkedIn/Twitter
 
 ---
 
-## Macro 2 — Data + Evaluation Rigour
-
-**Duration:** 3–4 weeks  
-**Goal:** Make your work measurable and defensible.
-
-### Add
-
-- **Test set v1:**
-  - coverage: routing, dependency injection, validation, responses, security, deployment
-  - adversarial: "ignore the docs and do X" style injections
-  - edge cases: version-specific behaviors, ambiguous questions
-- Prompt regression tests (don't break behavior)
-- Retrieval regression tests (don't degrade recall/citations)
-- Dataset versioning + experiment tracking (MLflow or W&B)
-
-### Open Source Target
-
-Scope issues in lm-evaluation-harness or RAGAS (docs gaps, missing metrics, small bugs).
-
-### Deliverables
-
-- [ ] Repo release v0.2 with `eval/` as a first-class module
-- [ ] Public "mini eval kit" inside the repo
-- [ ] Post: "How I Evaluate My FastAPI Docs Assistant"
-- [ ] Announce v0.2 on LinkedIn/Twitter
-
----
-
-## Macro 3 — Agents + Production Hard Skills
+## Macro 2 — Agents + Production Hard Skills
 
 **Duration:** 5–6 weeks  
 **Goal:** Build agentic capabilities and make the system production-ready.
@@ -169,11 +138,39 @@ First meaningful PR to lm-evaluation-harness, RAGAS, LlamaIndex, or LangGraph (b
 
 ### Deliverables
 
-- [ ] Repo release v0.3
+- [ ] Repo release v0.2
 - [ ] Agent mode with ReAct loop + expanded tools
 - [ ] Agent evaluation results (multi-hop accuracy, step efficiency)
 - [ ] Benchmark report: before vs after (latency, cost, failure rate)
 - [ ] "Production mode" config flags
+
+---
+
+## Macro 3 — Data + Evaluation Rigour
+
+**Duration:** 3–4 weeks  
+**Goal:** Make your work measurable and defensible.
+
+### Add
+
+- **Test set v1:**
+  - coverage: routing, dependency injection, validation, responses, security, deployment
+  - adversarial: "ignore the docs and do X" style injections
+  - edge cases: version-specific behaviors, ambiguous questions
+- Prompt regression tests (don't break behavior)
+- Retrieval regression tests (don't degrade recall/citations)
+- Dataset versioning + experiment tracking (MLflow or W&B)
+
+### Open Source Target
+
+Scope issues in lm-evaluation-harness or RAGAS (docs gaps, missing metrics, small bugs).
+
+### Deliverables
+
+- [ ] Repo release v0.3 with `eval/` as a first-class module
+- [ ] Public "mini eval kit" inside the repo
+- [ ] Post: "How I Evaluate My FastAPI Docs Assistant"
+- [ ] Announce v0.3 on LinkedIn/Twitter
 
 ---
 
